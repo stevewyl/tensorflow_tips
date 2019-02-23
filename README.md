@@ -13,7 +13,7 @@
     logits = tf.matmul(data, weights) + biases
 ```
 
-2. 确保需要训练的变量是float32精度，然后在模型中使用它们时转换为float16
+2. 确保需要训练的变量是float32精度，然后在模型中使用它们时转换为float16
 
 ```python
     tf.cast(tf.get_variable(..., dtype=tf.float32), tf.float16)
@@ -28,7 +28,7 @@
 4. 应用loss-scaling，在计算梯度的时候乘以比例因子，一般为128，然后将得到的梯度除以相同的比例
 
 ```python
-loss, params = ...
-scale = 128
-grads = [grad / scale for grad in tf.gradients(loss * scale, params)]
+    loss, params = ...
+    scale = 128
+    grads = [grad / scale for grad in tf.gradients(loss * scale, params)]
 ```
